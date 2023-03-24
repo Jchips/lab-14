@@ -44,8 +44,7 @@ function handleSubmit(event) {
   state.cart.saveToLocalStorage();
   state.cart.updateCounter();
 
-  updateCartPreview(state.cart.items.pop());
-  location.reload();
+  updateCartPreview(state.cart.items[state.cart.items.length - 1]);
 
 }
 

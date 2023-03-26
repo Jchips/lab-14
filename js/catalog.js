@@ -2,9 +2,8 @@
 
 'use strict';
 
-// Set up an empty cart for use on this page.
-// state.cart = new Cart([]);
-
+// Set up an empty cart for use on this page. If the local storage has a cart already,
+// use that.
 if (localStorage.cart) {
   state.cart = new Cart(JSON.parse(localStorage.cart));
   state.cart.updateCounter();
@@ -40,21 +39,18 @@ function handleSubmit(event) {
   // TODO: Prevent the page from reloading
   event.preventDefault();
 
-  // Do all the things ...
   addSelectedItemToCart();
 
   state.cart.saveToLocalStorage();
   state.cart.updateCounter();
-  // updateCartPreview(state.cart.items[state.cart.items.length - 1]);
-  // updateCartPreview(state.cart.items.pop());
-  updateCartPreview(state.cart.items.pop());
+
+  updateCartPreview(state.cart.items[state.cart.items.length - 1]);
 
 }
 
 // TODO: Add the selected item and quantity to the cart
 function addSelectedItemToCart() {
   // TODO: suss out the item picked from the select list
-  // how do I return the value of a specific item?
   let item = document.getElementById('items').value;
   // TODO: get the quantity
   let quantity = document.getElementById('quantity').value;
@@ -66,7 +62,6 @@ function addSelectedItemToCart() {
 
 // TODO: As you add items into the cart, show them (item & quantity) in the cart preview div
 function updateCartPreview(item) {
-  // console.log('POP ---->', state.cart.items.pop());
   // TODO: Get the item and quantity from the form
   // let item = state.cart.items.pop();
   let product = item.product;

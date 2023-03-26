@@ -2,7 +2,11 @@
 'use strict';
 
 // Create an event listener so that when the delete link is clicked, the removeItemFromCart method is invoked.
+
+// GLOBAL FUNCTIONS
 const table = document.getElementById('cart');
+let tbody = document.querySelector('#cart tbody');
+
 table.addEventListener('click', removeItemFromCart);
 
 function loadCart() {
@@ -19,20 +23,27 @@ function renderCart() {
   state.cart.updateCounter();
 }
 
-let tbody = document.querySelector('#cart tbody');
 // TODO: Remove all of the rows (tr) in the cart table (tbody)
 function clearCart() {
-  for (let i = 0; i<tbody.rows.length; i++){
-    tbody.deleteRow(i); 
+  const tableRows = document.querySelectorAll('#cart tbody tr');
+  console.log(tableRows);
+
+  for(let i = 0; i <= tableRows.length; i++){
+    if(tableRows[i]){
+      tableRows[i].remove();
+    }
   }
-  console.log('table row length:', table.rows.length);
 }
 
 // TODO: Fill in the <tr>'s under the <tbody> for each item in the cart
 function showCart() {
 
   // TODO: Find the table body
-  for (let i=0; i<state.cart.items.length; i++){
+  // TODO: Iterate over the items in the cart
+  // TODO: Create a TR
+  // TODO: Create a TD for the delete link, quantity,  and the item
+  // TODO: Add the TR to the TBODY and each of the TD's to the TR
+  for (let i = 0; i < state.cart.items.length; i++) {
     let tr = document.createElement('tr');
     let td = document.createElement('td');
     let deleteLink = document.createElement('button');
@@ -51,34 +62,17 @@ function showCart() {
     tr.appendChild(tdTwo);
     tbody.appendChild(tr);
   }
-  // TODO: Iterate over the items in the cart
-  // TODO: Create a TR
-  // TODO: Create a TD for the delete link, quantity,  and the item
-  // TODO: Add the TR to the TBODY and each of the TD's to the TR
+
   console.log('state cart', state.cart.items);
 }
-
-function removeItemFromCart(event) {
-  // let deleteBtns = document.querySelectorAll('.delete-btn');
-  // for(let i = 0; i < deleteBtns.length; i++) {
-  //   deleteBtns[i].addEventListener('click', state.cart.removeItem);
-  // }
-  let targetId = event.target.id;
-  let deleteButtons = document.querySelectorAll('deleteButton');
-  for(let i = 0; i < deleteButtons.length; i++){
-    deleteButtons[i].addEventListener('click', removeItemFromCart);
-  }
-  state.cart.removeItem(targetId);
-  renderCart();
 
   // TODO: When a delete link is clicked, use cart.removeItem to remove the correct item
   // TODO: Save the cart back to local storage
   // TODO: Re-draw the cart table
-  // let target = event.target.id;
-  // state.cart.removeItem(target);
-  // state.cart.saveToLocalStorage();
-  // renderCart();
-
+function removeItemFromCart(event) {
+  let targetId = event.target.id;
+  state.cart.removeItem(targetId);
+  renderCart();
 }
 
 // This will initialize the page and draw the cart on screen

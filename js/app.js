@@ -26,15 +26,12 @@ Cart.prototype.saveToLocalStorage = function() {
 };
 
 Cart.prototype.removeItem = function(item) {
+  // TODO: Fill in this instance method to remove one item from the cart.
+  // Note: You will have to decide what kind of parameter to pass in here!
   console.log('item', item);
-  // state.cart.items.filter()
   this.items.splice(item, 1);
   state.cart.saveToLocalStorage();
   console.log('array:', this.items);
-
-  // TODO: Fill in this instance method to remove one item from the cart.
-  // Note: You will have to decide what kind of parameter to pass in here!
-
 };
 
 Cart.prototype.updateCounter = function() {
@@ -44,7 +41,7 @@ Cart.prototype.updateCounter = function() {
   //potentially address the itemCount element in my cart
 }
 
-// somehow tied to my form??
+// CartItem constructor
 const CartItem = function(product, quantity) {
   this.product = product;
   this.quantity = quantity;
@@ -56,6 +53,7 @@ const Product = function(filePath, name) {
   this.name = name;
 };
 
+// Product instances
 function generateCatalog() {
   let bag = new Product('assets/bag.jpg', 'Bag');
   let banana = new Product('assets/banana.jpg', 'Banana');
